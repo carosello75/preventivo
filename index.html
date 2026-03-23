@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Richiesta Realizzazione Sito Web</title>
+<title>Richiesta Sito Web - Fabio Cavalieri</title>
 
 <style>
 body {
     font-family: Arial, sans-serif;
     background: #f5f7fa;
     margin: 0;
-    padding: 0;
 }
 
 .container {
@@ -25,6 +24,11 @@ body {
 h1 {
     text-align: center;
     color: #333;
+}
+
+p {
+    text-align: center;
+    color: #666;
 }
 
 .form-group {
@@ -70,20 +74,17 @@ button:hover {
     background: #007744;
 }
 
-/* Firma */
 #signature-pad {
     border: 2px dashed #ccc;
     border-radius: 10px;
     width: 100%;
     height: 200px;
-    cursor: crosshair;
 }
 
 .clear-btn {
     margin-top: 10px;
     background: #ff4444;
 }
-
 </style>
 </head>
 
@@ -93,10 +94,14 @@ button:hover {
 
 <h1>📩 Richiesta Realizzazione Sito Web</h1>
 
-<form action="https://formsubmit.co/TUA_EMAIL" method="POST">
+<p>Compila il modulo per ricevere un preventivo personalizzato e iniziare subito il tuo progetto.</p>
+
+<form action="https://formsubmit.co/fabio.cavalieri@libero.it" method="POST">
 
 <input type="hidden" name="_subject" value="🚀 Nuovo Cliente Sito Web">
 <input type="hidden" name="_template" value="table">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_autoresponse" value="Grazie! La tua richiesta è stata ricevuta. Ti contatterò al più presto. - Fabio Cavalieri">
 
 <div class="form-group">
 <label>Data</label>
@@ -132,35 +137,33 @@ button:hover {
 </div>
 
 <div class="form-group">
-<label>Via / Indirizzo</label>
-<input type="text" name="via">
+<label>Indirizzo</label>
+<input type="text" name="indirizzo">
 </div>
 
 <div class="form-group">
-<label>Altro da aggiungere</label>
-<textarea name="note" rows="4"></textarea>
+<label>Descrizione progetto</label>
+<textarea name="descrizione" rows="4"></textarea>
 </div>
 
 <div class="price-box">
-<label>💻 Tipo di sito web</label>
+<label>💻 Tipo di sito</label>
 <select name="tipo_sito">
-<option value="800">Sito Base - €800</option>
-<option value="1500">E-commerce - €1500</option>
-<option value="2000">Piattaforma Pro - €2000</option>
+<option>Sito Base - €800</option>
+<option>E-commerce - €1500</option>
+<option>Piattaforma Pro - €2000</option>
 </select>
 </div>
 
 <h3>✍️ Firma Digitale</h3>
 <canvas id="signature-pad"></canvas>
-<button type="button" class="clear-btn" onclick="clearCanvas()">Cancella 
-Firma</button>
+<button type="button" class="clear-btn" onclick="clearCanvas()">Cancella Firma</button>
 
 <input type="hidden" name="firma" id="firma">
 
 <br><br>
 
-<button type="submit" onclick="saveSignature()">Invia richiesta + 
-Acconto</button>
+<button type="submit" onclick="saveSignature()">Invia richiesta</button>
 
 </form>
 
@@ -195,6 +198,7 @@ function drawTouch(e) {
     e.preventDefault();
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
+
     const x = touch.clientX - rect.left;
     const y = touch.clientY - rect.top;
 
