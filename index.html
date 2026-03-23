@@ -93,15 +93,14 @@ button:hover {
 <div class="container">
 
 <h1>📩 Richiesta Realizzazione Sito Web</h1>
+<p>Compila il modulo per ricevere un preventivo personalizzato.</p>
 
-<p>Compila il modulo per ricevere un preventivo personalizzato e iniziare subito il tuo progetto.</p>
-
-<form action="https://formsubmit.co/fabio.cavalieri@libero.it" method="POST">
+<form id="contactForm" action="https://formsubmit.co/fabio.cavalieri@libero.it" method="POST">
 
 <input type="hidden" name="_subject" value="🚀 Nuovo Cliente Sito Web">
 <input type="hidden" name="_template" value="table">
 <input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_autoresponse" value="Grazie! La tua richiesta è stata ricevuta. Ti contatterò al più presto. - Fabio Cavalieri">
+<input type="hidden" name="_autoresponse" value="Grazie! Ti contatterò presto. - Fabio Cavalieri">
 <input type="hidden" name="_next" value="https://carosello75.github.io/preventivo/">
 <input type="hidden" name="_replyto" value="email">
 
@@ -165,7 +164,7 @@ button:hover {
 
 <br><br>
 
-<button type="submit" onclick="saveSignature()">Invia richiesta</button>
+<button type="submit">Invia richiesta</button>
 
 </form>
 
@@ -178,11 +177,17 @@ const ctx = canvas.getContext("2d");
 let drawing = false;
 
 canvas.addEventListener("mousedown", () => drawing = true);
-canvas.addEventListener("mouseup", () => drawing = false);
+canvas.addEventListener("mouseup", () => {
+    drawing = false;
+    ctx.beginPath();
+});
 canvas.addEventListener("mousemove", draw);
 
 canvas.addEventListener("touchstart", () => drawing = true);
-canvas.addEventListener("touchend", () => drawing = false);
+canvas.addEventListener("touchend", () => {
+    drawing = false;
+    ctx.beginPath();
+});
 canvas.addEventListener("touchmove", drawTouch);
 
 function draw(e) {
@@ -191,8 +196,6 @@ function draw(e) {
     ctx.lineCap = "round";
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(e.offsetX, e.offsetY);
 }
 
 function drawTouch(e) {
@@ -207,17 +210,16 @@ function drawTouch(e) {
     ctx.lineCap = "round";
     ctx.lineTo(x, y);
     ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(x, y);
 }
+
+// salva firma PRIMA dell'invio
+document.getElementById("contactForm").addEventListener("submit", function() {
+    const dataURL = canvas.toDataURL();
+    document.getElementById("firma").value = dataURL;
+});
 
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function saveSignature() {
-    const dataURL = canvas.toDataURL();
-    document.getElementById("firma").value = dataURL;
 }
 </script>
 
